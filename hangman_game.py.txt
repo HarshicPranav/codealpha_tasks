@@ -1,0 +1,59 @@
+import random
+
+# List of words for the game
+words = ["Cricket", "Football", "Volleyball", "Tennis", "basketball", "throwball", "Handball", "Carrom", "chess", "shuttle"]
+       print("Guessed letters:", ' '.join(sorted(guessed)))
+        
+        # Get the player's guess
+        guess = input("Enter a letter: ").lower()
+        
+        # Check for valid input
+        if len(guess) != 1 or not guess.isalpha():
+            print("Please enter a valid single letter.")
+            continue
+        
+        if guess in guessed:
+            print("You already guessed that letter.")
+            continue
+        
+        guessed.add(guess)
+
+        if guess in word:
+            print(f"Good guess! '{guess}' is in the word.")
+            # Update the guessed letters list
+            for i in range(word_length):
+                if word[i] == guess:
+                    guessed_letters[i] = guess
+        else:
+            incorrect_guesses += 1
+            print(f"Oops! '{guess}' is not in the word.")
+        
+        # Check if the player has guessed the word
+        if ''.join(guessed_letters) == word:
+            print(f"\nCongratulations! You've guessed the word: {word}")
+            break
+    else:
+        print(f"\nSorry, you've run out of guesses. The word was: {word}")
+
+# Run the game
+if __name__ == "__main__":
+    hangman_game()
+
+def hangman_game():
+    # Select a random word
+    word = random.choice(words)
+    word_length = len(word)
+    guessed_letters = ['_'] * word_length  # List to store guessed letters
+    incorrect_guesses = 0
+    max_incorrect_guesses = 6  # Max number of incorrect guesses allowed
+    guessed = set()  # Set to store guessed letters
+
+    print("Welcome to Hangman!")
+    print("Try to guess the word.")
+    print("You can guess one letter at a time.")
+    
+    # Game loop
+    while incorrect_guesses < max_incorrect_guesses:
+        print("\nWord: ", ' '.join(guessed_letters))
+        print(f"Incorrect guesses left: {max_incorrect_guesses - incorrect_guesses}")
+ 
